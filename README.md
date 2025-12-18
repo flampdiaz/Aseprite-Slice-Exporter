@@ -65,3 +65,15 @@ You are free to use, study, and modify this extension.
 - Improvements and changes must be shared publicly under the same license.
 
 Using this extension as a tool does **not** require your own projects (games, assets, pipelines) to be open source.
+
+## Support
+
+My work is open-source and developed in my free time.
+
+If this extension helps you, your support goes beyond this project. It helps me continue creating games and tools that empower other developers to build their own games and products across different engines and technologies, such as Aseprite, Unity, Godot, Unreal Engine, raylib, and more.
+
+Supporting my work allows me to dedicate more time to building open, useful tools and long-term projects for the game development community.
+
+- ☕ [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-support-yellow)](https://buymeacoffee.com/flampdiaz.dev)
+
+Thank you for supporting independent open-source development ❤️
