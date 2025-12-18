@@ -61,17 +61,20 @@ jobs:
       - name: Create clean extension ZIP
         run: |
           OUTDIR="/tmp/release"
-          mkdir -p "$OUTDIR/aseprite-slice-exporter"
+          FOLDER_NAME="Aseprite Slice Exporter"
+          ZIP_NAME="Aseprite Slice Exporter ${{ steps.tag.outputs.tag }}.zip"
+
+          mkdir -p "$OUTDIR/$FOLDER_NAME"
 
           rsync -av \
             --exclude='.github' \
             --exclude='.git' \
             --exclude='.gitignore' \
             --exclude='.gitattributes' \
-            ./ "$OUTDIR/aseprite-slice-exporter"
+            ./ "$OUTDIR/$FOLDER_NAME"
 
           cd "$OUTDIR"
-          zip -r "aseprite-slice-exporter-${{ steps.tag.outputs.tag }}.zip" "aseprite-slice-exporter"
+          zip -r "$ZIP_NAME" "$FOLDER_NAME"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -96,4 +99,4 @@ jobs:
             **License**
             GPLv3: modifications must remain open-source and credit is required.
           files: |
-            /tmp/release/aseprite-slice-exporter-${{ steps.tag.outputs.tag }}.zip
+            /tmp/release/Aseprite Slice Exporter ${{ steps.tag.outputs.tag }}.zip
