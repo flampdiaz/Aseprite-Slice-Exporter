@@ -3,7 +3,14 @@
     "displayName": "Export Slices as PNG",
     "description": "Export each Slice as a separate PNG named after the Slice.",
     "version": "1.0.0",
-    "publisher": "flampdiaz",
+    "publisher": "flampdiaz.dev",
+    "author": "Flampeyeiry Diaz",
+    "homepage": "https://flampdiaz.dev",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/flampdiaz/aseprite-slice-exporter"
+    },
+    "license": "GPL-3.0",
     "categories": [
         "Scripts"
     ],
