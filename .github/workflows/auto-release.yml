@@ -68,8 +68,9 @@ jobs:
 
             **Installation**
             - Download the ZIP from this release
-            - Extract it into your Aseprite extensions folder
-            - Restart Aseprite and enable the extension
+            - Open Aseprite → Edit → Preferences → Extensions
+            - Click **Add Extension** and select the downloaded ZIP file
+            - Restart Aseprite if prompted
 
             Full documentation:
             https://github.com/flampdiaz/aseprite-slice-exporter/blob/main/README.md
