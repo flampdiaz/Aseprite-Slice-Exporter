@@ -59,11 +59,14 @@ jobs:
           git push origin --tags
 
       - name: Create clean extension ZIP
+        id: zip
         run: |
           OUTDIR="/tmp/release"
           FOLDER_NAME="Aseprite Slice Exporter"
           ZIP_NAME="Aseprite Slice Exporter ${{ steps.tag.outputs.tag }}.zip"
+          ZIP_PATH="$OUTDIR/$ZIP_NAME"
 
+          rm -rf "$OUTDIR"
           mkdir -p "$OUTDIR/$FOLDER_NAME"
 
           rsync -av \
@@ -75,6 +78,10 @@ jobs:
 
           cd "$OUTDIR"
           zip -r "$ZIP_NAME" "$FOLDER_NAME"
+
+          echo "zip_path=$ZIP_PATH" >> $GITHUB_OUTPUT
+          echo "Created: $ZIP_PATH"
+          ls -la "$OUTDIR"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -98,5 +105,4 @@ jobs:
 
             **License**
             GPLv3: modifications must remain open-source and credit is required.
-          files: |
-            /tmp/release/Aseprite Slice Exporter ${{ steps.tag.outputs.tag }}.zip
+          files: ${{ steps.zip.outputs.zip_path }}
