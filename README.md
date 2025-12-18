@@ -19,12 +19,19 @@ This tool is designed for artists and developers who work with slices (UI elemen
 
 ## Installation
 
-1. Download or clone this repository
-2. Place the folder into your Aseprite extensions directory:
-   `~/Library/Application Support/Aseprite/extensions/`
-3. Restart Aseprite
-4. Enable the extension from:
-   `Edit → Preferences → Extensions`
+1. Go to the **Releases** page:  
+   👉 [https://github.com/flampdiaz/aseprite-slice-exporter/releases](https://github.com/flampdiaz/aseprite-slice-exporter/releases)
+2. Download the latest file:  
+   **aseprite-slice-exporter-vX.Y.Z.zip**
+3. Open Aseprite and go to:  
+   **Edit → Preferences → Extensions**
+4. Click **Add Extension** and select the downloaded ZIP file
+5. Restart Aseprite if prompted
+
+### Updating
+
+To update the extension, download the newest release ZIP and repeat the same installation steps above.  
+Updates are installed manually.
 
 ---
 
