@@ -1,12 +1,11 @@
 local utils = {}
 
-function utils.showError(msg)
-  app.alert{ title="Export Slices", text=msg }
+function utils.showError(errorMessage)
+  app.alert{ title="Export Slices", text=errorMessage }
 end
 
-function utils.sanitizeFilename(name)
-  -- Safe across macOS/Windows
-  return (name:gsub("[/\\:%*%?\"%<%>%|]", "_"))
+function utils.sanitizeFilename(filename)
+  return (filename:gsub("[/\\:%*%?\"%<%>%|]", "_"))
 end
 
 return utils

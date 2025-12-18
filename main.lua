@@ -1,7 +1,7 @@
 local dialogManager = require "dialog_manager"
 
-function init(plugin)
-  plugin:newCommand{
+function init(pluginInstance)
+  pluginInstance:newCommand{
     id="ExportSlicesAsPNGs",
     title="Export Slices as PNGs...",
     group="file_export",
@@ -11,4 +11,4 @@ function init(plugin)
   }
 end
 
-function exit(plugin) end
+function exit(pluginInstance) end

@@ -1,58 +1,51 @@
 local utils = require "utils"
 local exporter = {}
 
--- Pure export logic (no dialogs)
--- spr: Sprite
--- outDir: string (folder)
--- pattern: string (e.g. "{slice}.png")
--- onlyCurrentFrame: boolean
--- returns: exportedCount (number)
-function exporter.exportSlicesToPngs(spr, outDir, pattern, onlyCurrentFrame)
-  if not spr then
+function exporter.exportSlicesToPngs(sprite, outputDirectory, filenamePattern, onlyCurrentFrame)
+  if not sprite then
     utils.showError("No active sprite open.")
     return 0
   end
-  if not spr.slices or #spr.slices == 0 then
+  if not sprite.slices or #sprite.slices == 0 then
     utils.showError("This sprite has no slices.")
     return 0
   end
-  if not outDir or outDir == "" then
+  if not outputDirectory or outputDirectory == "" then
     utils.showError("Choose an output folder.")
     return 0
   end
-  if not pattern or pattern == "" then
-    pattern = "{slice}.png"
+  if not filenamePattern or filenamePattern == "" then
+    filenamePattern = "{slice}.png"
   end
 
-  -- Decide frame to render
   local frameNumber = app.activeFrame and app.activeFrame.frameNumber or 1
 
   -- Render the sprite (current frame) into an in-memory image
   -- This avoids SaveFileCopyAs(slice=...) issues (empty/duplicate output).
-  local full = Image(spr.width, spr.height)
-  full:drawSprite(spr, frameNumber)
+  local renderedSpriteImage = Image(sprite.width, sprite.height)
+  renderedSpriteImage:drawSprite(sprite, frameNumber)
 
-  local exported = 0
+  local exportedCount = 0
 
-  for _, sl in ipairs(spr.slices) do
-    local name = sl.name
-    if name and name ~= "" then
-      local b = sl.bounds
-      if b.width > 0 and b.height > 0 then
-        local fileName = pattern:gsub("{slice}", utils.sanitizeFilename(name))
-        local fullPath = app.fs.joinPath(outDir, fileName)
+  for _, currentSlice in ipairs(sprite.slices) do
+    local sliceName = currentSlice.name
+    if sliceName and sliceName ~= "" then
+      local sliceBounds = currentSlice.bounds
+      if sliceBounds.width > 0 and sliceBounds.height > 0 then
+        local exportFileName = filenamePattern:gsub("{slice}", utils.sanitizeFilename(sliceName))
+        local fullExportPath = app.fs.joinPath(outputDirectory, exportFileName)
 
-        local img = Image(b.width, b.height)
+        local sliceImage = Image(sliceBounds.width, sliceBounds.height)
         -- Copy pixels from full render: shift so slice top-left becomes (0,0)
-        img:drawImage(full, Point(-b.x, -b.y))
+        sliceImage:drawImage(renderedSpriteImage, Point(-sliceBounds.x, -sliceBounds.y))
 
-        img:saveAs(fullPath)
-        exported = exported + 1
+        sliceImage:saveAs(fullExportPath)
+        exportedCount = exportedCount + 1
       end
     end
   end
 
-  return exported
+  return exportedCount
 end
 
 return exporter
