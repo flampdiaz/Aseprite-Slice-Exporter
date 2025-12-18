@@ -3,11 +3,11 @@ name: Auto Patch Version + Tag + Release
 on:
   push:
     branches: ["main"]
-    paths-ignore:
-      - "**/*.md"
-      - "README.md"
-      - "LICENSE"
-      - ".gitignore"
+    paths:
+      - "**/*.lua"
+      - "package.json"
+      - ".github/workflows/**"
+  workflow_dispatch:
 
 permissions:
   contents: write
