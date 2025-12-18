@@ -41,6 +41,17 @@ jobs:
           git push origin main
           git push origin --tags
 
+      - name: Create clean extension ZIP
+        run: |
+          mkdir release
+          rsync -av \
+            --exclude='.github' \
+            --exclude='.git' \
+            --exclude='.gitignore' \
+            ./ release/aseprite-slice-exporter
+          cd release
+          zip -r aseprite-slice-exporter-${{ steps.bump.outputs.tag }}.zip aseprite-slice-exporter
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -62,4 +73,6 @@ jobs:
 
             **License**
             GPLv3 — modifications must remain open-source and credit is required.
+          files: |
+            release/aseprite-slice-exporter-${{ steps.bump.outputs.tag }}.zip
           generate_release_notes: true
