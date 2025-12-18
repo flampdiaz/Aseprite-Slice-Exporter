@@ -32,10 +32,22 @@ jobs:
       - name: Create patch tag and version commit
         id: tag
         run: |
+          # Make sure we know about remote tags
+          git fetch --tags
+
           CURRENT_VERSION=$(node -p "require('./package.json').version")
           echo "Current version: $CURRENT_VERSION"
 
+          # Try to bump patch. If the tag already exists, try again.
+          set +e
           npm version patch -m "chore(release): v%s [skip ci]"
+          STATUS=$?
+          set -e
+
+          if [ $STATUS -ne 0 ]; then
+            echo "First npm version attempt failed (likely tag exists). Retrying..."
+            npm version patch -m "chore(release): v%s [skip ci]"
+          fi
 
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
