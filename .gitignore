@@ -1,0 +1,15 @@
+# --- Build / Release artifacts ---
+release/
+dist/
+*.zip
+
+# --- GitHub Actions temp ---
+/tmp/
+.tmp/
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
