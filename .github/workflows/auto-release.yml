@@ -46,4 +46,20 @@ jobs:
         with:
           tag_name: ${{ steps.bump.outputs.tag }}
           name: ${{ steps.bump.outputs.tag }}
+          body: |
+            **Aseprite Slice Exporter**
+
+            This Aseprite extension exports each slice as an individual PNG file,
+            preserving slice names and exact bounds, without using the Aseprite CLI.
+
+            **Installation**
+            - Download the ZIP from this release
+            - Extract it into your Aseprite extensions folder
+            - Restart Aseprite and enable the extension
+
+            Full documentation:
+            https://github.com/flampdiaz/aseprite-slice-exporter/blob/main/README.md
+
+            **License**
+            GPLv3 — modifications must remain open-source and credit is required.
           generate_release_notes: true
